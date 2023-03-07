@@ -5,7 +5,7 @@ public class Agenda {
     private Cliente[] clientes;
     private int cantidadClientes;
 
-    public Agenda(int cantidadClientes) {
+    public Agenda() {
         this.clientes = new Cliente[cantidadClientes];
         this.cantidadClientes = 0;
     }
@@ -43,20 +43,12 @@ public class Agenda {
         }
     }
 
-    //modificar un cliente por dni
-    public void modificarCliente(String dni, Cliente cliente) {
+    //modificar clientes de la agenda
+    public void modificarCliente(Cliente cliente) {
         for (int i = 0; i < cantidadClientes; i++) {
-            if (clientes[i].getDni().equals(dni)) {
+            if (clientes[i].getDni().equals(cliente.getDni())) {
                 clientes[i] = cliente;
             }
         }
     }
-
-
-
-
-
-
-
-
 }
