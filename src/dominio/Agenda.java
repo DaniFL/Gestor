@@ -3,30 +3,32 @@ package dominio;
 public class Agenda {
     //crear una agenda de clientes
     private Cliente[] clientes;
-    private int cantidadClientes;
 
     public Agenda() {
-        this.clientes = new Cliente[cantidadClientes];
-        this.cantidadClientes = 0;
+        this.clientes = new Cliente[100];
     }
 
+    //agregar clientes a la agenda
     public void agregarCliente(Cliente cliente) {
-        if (cantidadClientes < clientes.length) {
-            clientes[cantidadClientes] = cliente;
-            cantidadClientes++;
+        for (int i = 0; i < clientes.length; i++) {
+            if (clientes[i] == null) {
+                clientes[i] = cliente;
+                cliente.add(cliente);
+                break;
+            }
         }
     }
 
     public void mostrarClientes() {
-        for (int i = 0; i < cantidadClientes; i++) {
+        for (int i = 0; i < clientes.length; i++) {
             System.out.println(clientes[i].getNombre() + " " + clientes[i].getApellido());
         }
     }
 
     //buscar un cliente por dni
     public Cliente buscarCliente(String dni) {
-        for (int i = 0; i < cantidadClientes; i++) {
-            if (clientes[i].getDni().equals(dni)) {
+        for (int i = 0; i < clientes.length; i++) {
+            if (clientes[i] != null && clientes[i].getDni().equals(dni)) {
                 return clientes[i];
             }
         }
@@ -35,20 +37,20 @@ public class Agenda {
 
     //eliminar un cliente por dni
     public void eliminarCliente(String dni) {
-        for (int i = 0; i < cantidadClientes; i++) {
-            if (clientes[i].getDni().equals(dni)) {
-                clientes[i] = clientes[cantidadClientes - 1];
-                cantidadClientes--;
+        for (int i = 0; i < clientes.length; i++) {
+            if (clientes[i] != null && clientes[i].getDni().equals(dni)) {
+                clientes[i] = null;
+                break;
             }
         }
     }
 
-    //modificar clientes de la agenda
-    public void modificarCliente(Cliente cliente) {
-        for (int i = 0; i < cantidadClientes; i++) {
-            if (clientes[i].getDni().equals(cliente.getDni())) {
-                clientes[i] = cliente;
-            }
-        }
-    }
+    //modificar un cliente por dni
+
+
+
+
+
+
+
 }

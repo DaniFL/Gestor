@@ -28,23 +28,63 @@ public class Principal {
                             String nombre = sc.next();
                             System.out.println("Ingrese el apellido del cliente");
                             String apellido = sc.next();
-                            System.out.println("Ingrese el dni del cliente");
-                            String dni = sc.next();
+
+                            String dni;
+                            boolean dniValido = false;
+                            do {
+                                System.out.println("Ingrese su DNI (8 números seguidos de una letra):");
+                                dni = sc.nextLine();
+                                // Verifica que la entrada del usuario tenga el formato correcto
+                                if (dni.matches("[0-9]{8}[A-Za-z]")) {
+                                    dniValido = true;
+                                } else {
+                                    System.out.println("El formato del DNI es inválido. Inténtelo de nuevo.");
+                                }
+                            } while (!dniValido);
+                            // Verifica si la letra del DNI es correcta utilizando el algoritmo de validación
+                            // que se utiliza en España (letra = "TRWAGMYFPDXBNJZSQVHLCKE")
+                            int dniNumerico = Integer.parseInt(dni.substring(0, 8));
+                            char letraCalculada = calcularLetraDNI(dniNumerico);
+                            char letraDNI = dni.charAt(8);
+                            if (letraCalculada == letraDNI) {
+                                System.out.println("El DNI ingresado es válido.");
+                            } else {
+                                System.out.println("La letra del DNI no es correcta. El DNI es inválido.");
+                            }
+
                             System.out.println("Ingrese la direccion del cliente");
                             String direccion = sc.next();
-                            int telefono = 0;
-                            try {
-                                while (String.valueOf(telefono).length() != 9) {
-                                    System.out.println("Ingrese el telefono del cliente");
-                                    telefono = sc.nextInt();
+
+                            // Se utiliza un bucle do-while para solicitar al usuario que ingrese su número de teléfono
+                            // hasta que lo haga en el formato correcto. Luego, se muestra un mensaje diciendo que el número
+                            // de teléfono es válido.
+
+                            String telefono;
+                            boolean telefonoValido = false;
+
+                            // Pide al usuario que ingrese su número de teléfono y lo almacena en una variable String
+                            do {
+                                System.out.println("Ingrese su número de teléfono (9 dígitos):");
+                                telefono = sc.nextLine();
+                                // Verifica que la entrada del usuario tenga el formato correcto
+                                if (telefono.matches("[0-9]{9}")) {
+                                    telefonoValido = true;
+                                } else {
+                                    System.out.println("El formato del número de teléfono es inválido. Inténtelo de nuevo.");
                                 }
-                            } catch (Exception e) {
-                                System.out.println("Ingrese un numero valido");
-                            }
+                            } while (!telefonoValido);
+
+                            // Si el número de teléfono es válido, se muestra un mensaje de confirmación
+                            System.out.println("El número de teléfono ingresado es válido.");
+
                             System.out.println("Ingrese el email del cliente");
                             String email = sc.nextLine();
+
+                            //una vez que se ingresan los datos se crea el objeto cliente
                             Cliente cliente = new Cliente(nombre, apellido, dni, direccion, telefono, email);
+                            //añadir objeto cliente a la agenda
                             agenda.agregarCliente(cliente);
+
                         }
                         break;
                     case 2:
@@ -87,4 +127,13 @@ public class Principal {
             }
         }
     }
+    public static char calcularLetraDNI(int dniNumerico) {
+        String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+        int indiceLetra = dniNumerico % 23;
+        return letras.charAt(indiceLetra);
+    }
 }
+
+
+
+
