@@ -28,11 +28,24 @@ public class Principal {
                     case 1:
                         System.out.println("Ingrese la cantidad de clientes que desea agregar");
                         int cantidadClientes = Integer.parseInt(br.readLine());
+                        int n = 0;
+
                         for (int i = 0; i < cantidadClientes; i++) {
-                            System.out.println("Ingrese el nombre del cliente");
-                            String nombre = br.readLine();
-                            System.out.println("Ingrese el apellido del cliente");
-                            String apellido = br.readLine();
+                            n++;
+                            String nombre;
+                            String apellido;
+                            // verificar que el nombre y apellido sean solo letras, si el usuario ingresa un numero, se le vuelve a pedir que ingrese el nombre y apellido
+                            do {
+                                System.out.println("Ingrese el nombre del cliente" + i + ":");
+                                nombre = br.readLine();
+                                System.out.println("Ingrese el apellido del cliente" + i + ":");
+                                apellido = br.readLine();
+                                if (nombre.matches("^[a-zA-Z ]+$") && apellido.matches("^[a-zA-Z ]+$")) {
+                                    System.out.println("Nombre y apellido válidos.");
+                                } else {
+                                    System.out.println("Nombre y apellido inválidos.");
+                                }
+                            } while (!nombre.matches("^[a-zA-Z ]+$") && !apellido.matches("^[a-zA-Z ]+$"));
 
                             String dni;
                             boolean dniValido = false;
@@ -42,6 +55,7 @@ public class Principal {
                                 // Verifica que la entrada del usuario tenga el formato correcto
                                 if (dni.matches("[0-9]{8}[A-Za-z]")) {
                                     dniValido = true;
+                                    System.out.println("El DNI ingresado es válido.");
                                 } else {
                                     System.out.println("El formato del DNI es inválido. Inténtelo de nuevo.");
                                 }
@@ -72,7 +86,7 @@ public class Principal {
                             String email = br.readLine();
 
                             //una vez que se ingresan los datos se crea el objeto cliente
-                            Cliente cliente = new Cliente(nombre, apellido, dni, direccion, telefono, email);
+                            Cliente cliente = new Cliente(n, nombre, apellido, dni, direccion, telefono, email);
                             //añadir objeto cliente a la agenda
                             agenda.agregarCliente(cliente);
 

@@ -1,6 +1,7 @@
 package dominio;
 
 public class Cliente {
+    private int n;
     private String nombre;
     private String apellido;
     private String dni;
@@ -9,7 +10,9 @@ public class Cliente {
     private String email;
 
 
-    public Cliente(String nombre, String apellido, String dni, String direccion, String telefono, String email) {
+
+    public Cliente(int n, String nombre, String apellido, String dni, String direccion, String telefono, String email) {
+        this.n = n;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -18,11 +21,18 @@ public class Cliente {
         this.email = email;
     }
 
-    int n = 0;
 
     @Override
     public String toString() {
         return "Cliente " +n+ "\n - Nombre: " + nombre + "\n - Apellido: " + apellido + "\n - DNI: " + dni + "\n - Direccion: " + direccion + "\n - Telefono: " + telefono + "\n - Email=" + email + "\n";
+    }
+
+    public int getN() {
+        return n;
+    }
+
+    public void setN(int n) {
+        this.n = n;
     }
 
     public String getNombre() {
