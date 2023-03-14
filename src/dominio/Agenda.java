@@ -1,35 +1,32 @@
 package dominio;
 
+import java.util.ArrayList;
+
 public class Agenda {
     //crear una agenda de clientes
-    private Cliente[] clientes;
+    private ArrayList<Cliente> clientes;
 
     public Agenda() {
-        this.clientes = new Cliente[100];
+        clientes = new ArrayList<>();
     }
 
     //agregar clientes a la agenda
     public void agregarCliente(Cliente cliente) {
-        for (int i = 0; i < clientes.length; i++) {
-            if (clientes[i] == null) {
-                clientes[i] = cliente;
-                cliente.add(cliente);
-                break;
-            }
-        }
+        clientes.add(cliente);
     }
 
+    //mostrar todos los clientes
     public void mostrarClientes() {
-        for (int i = 0; i < clientes.length; i++) {
-            System.out.println(clientes[i].getNombre() + " " + clientes[i].getApellido());
+        for (Cliente cliente : clientes) {
+            System.out.println(cliente);
         }
     }
 
     //buscar un cliente por dni
     public Cliente buscarCliente(String dni) {
-        for (int i = 0; i < clientes.length; i++) {
-            if (clientes[i] != null && clientes[i].getDni().equals(dni)) {
-                return clientes[i];
+        for (Cliente cliente : clientes) {
+            if (cliente.getDni().equals(dni)) {
+                return cliente;
             }
         }
         return null;
@@ -37,20 +34,21 @@ public class Agenda {
 
     //eliminar un cliente por dni
     public void eliminarCliente(String dni) {
-        for (int i = 0; i < clientes.length; i++) {
-            if (clientes[i] != null && clientes[i].getDni().equals(dni)) {
-                clientes[i] = null;
-                break;
-            }
+        Cliente cliente = buscarCliente(dni);
+        if (cliente != null) {
+            clientes.remove(cliente);
         }
     }
 
     //modificar un cliente por dni
-
-
-
-
+    public void modificarCliente(Cliente cliente) {
+        Cliente cliente2 = buscarCliente(cliente.getDni());
+        if (cliente2 != null) {
+            cliente2.setNombre(cliente.getNombre());
+        }
+    }
 
 
 
 }
+

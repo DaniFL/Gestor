@@ -7,7 +7,7 @@ public class Cliente {
     private String direccion;
     private String telefono;
     private String email;
-    private String gestor;
+
 
     public Cliente(String nombre, String apellido, String dni, String direccion, String telefono, String email) {
         this.nombre = nombre;
@@ -16,6 +16,13 @@ public class Cliente {
         this.direccion = direccion;
         this.telefono = telefono;
         this.email = email;
+    }
+
+    int n = 0;
+
+    @Override
+    public String toString() {
+        return "Cliente " +n+ "\n - Nombre: " + nombre + "\n - Apellido: " + apellido + "\n - DNI: " + dni + "\n - Direccion: " + direccion + "\n - Telefono: " + telefono + "\n - Email=" + email + "\n";
     }
 
     public String getNombre() {
@@ -66,12 +73,4 @@ public class Cliente {
         this.email = email;
     }
 
-    public String getGestor() {
-        return gestor;
-    }
-
-    public void setGestor(String gestor) {
-        this.gestor = gestor;
-    }
-    
 }
